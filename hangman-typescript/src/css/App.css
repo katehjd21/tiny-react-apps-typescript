@@ -1,34 +1,113 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  font-family: "Josefin Sans", serif;
+}
+
+h1 {
+  font-size: 4rem;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
 .hangman-container {
-  max-width: 850px;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  margin: 15px auto;
+  flex-wrap: wrap;
+  max-width: 1000px; /* Increase max width */
+  width: 100%;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.hangman-graphic-container {
+  flex: 1 1 200px; /* Increase flex-basis */
+  display: flex;
+  justify-content: flex-start;
+  min-width: 200px;
+  margin-right: 10px;
+  align-items: flex-start;
+}
+
+.word-keyboard-container {
+  flex: 1 1 200px; /* Increase flex-basis */
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  margin: 0 auto;
   align-items: center;
+  justify-content: center;
+  min-width: 200px;
+  margin: 0 20px;
+  padding: 20px;
 }
 
 .alphabet-buttons {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 0.3rem;
   list-style-type: none;
-  flex-wrap: wrap;
+  padding: 1rem;
+  margin: 0 auto;
 }
 
 .alphabet-button {
-  width: 30px;
-  height: 30px;
+  width: 50px;
+  height: 50px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  background: #ff5722;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+  transition: 0.3s ease;
+  cursor: pointer;
+  font-family: "Josefin Sans", serif;
+}
+
+.alphabet-button:hover {
+  background: #e64a19;
+  transform: scale(1.1);
+}
+
+.alphabet-button:active {
+  background: #bf360c;
+  box-shadow: inset 2px 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.alphabet-button.clicked {
+  background: #bbb;
+  pointer-events: none; /* Disable click */
 }
 
 .word-display {
   display: flex;
   justify-content: center;
+  margin-bottom: 50px;
+  margin-top: 50px;
 }
 
 .word-display-letter {
+  font-size: 3.5rem;
+  font-weight: bold;
+  color: yellow;
   padding: 10px;
-  font-size: 3rem;
-}
-
-.message {
+  font-family: "Josefin Sans", serif;
 }
 
 .popup {
@@ -36,8 +115,162 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: white;
-  padding: 20px;
-  border: 2px solid black;
+  width: 65vw;
+  max-width: 550px;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 2.5rem;
+  border-radius: 12px;
   text-align: center;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+  border: 3px solid white;
+}
+
+.popup-content {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 12px;
+  width: 100%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  font-size: 1.2rem;
+}
+
+.popup button {
+  margin-top: 1rem;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white;
+  background: red;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.popup button:hover {
+  background: darkred;
+}
+
+.message {
+  margin-bottom: 6vh;
+}
+
+.lives-hangman-graphic {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 20vh;
+}
+
+.lives {
+  font-size: 2rem; /* Large text */
+  font-weight: bold;
+  color: yellow; /* Bright red for urgency */
+  text-shadow: 0px 0px 10px rgba(255, 68, 68, 0.8); /* Glowing effect */
+  padding: 10px 20px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.6); /* Subtle dark background */
+  display: inline-block;
+  margin: 20px auto;
+  border: 3px solid yellow;
+}
+
+@media (max-width: 768px) {
+  h1 {
+    display: none;
+  }
+  .hangman-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem; /* Increase spacing for better readability */
+    padding: 5px;
+  }
+
+  .hangman-graphic-container,
+  .word-keyboard-container {
+    margin: 0; /* Remove extra margins */
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .alphabet-buttons {
+    grid-template-columns: repeat(
+      8,
+      1fr
+    ); /* Reduce columns for better button spacing */
+  }
+
+  .alphabet-button {
+    width: 35px;
+    height: 30px;
+  }
+
+  .word-display {
+    flex-wrap: wrap; /* Allow letters to wrap on smaller screens */
+    margin-bottom: 30px;
+    margin-top: 10px;
+  }
+
+  .word-display-letter {
+    font-size: 2.5rem; /* Reduce font size to fit smaller screens */
+    padding: 5px;
+  }
+
+  .message {
+    display: none;
+  }
+
+  .lives-hangman-graphic {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 5vh;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    display: none;
+  }
+  .alphabet-buttons {
+    grid-template-columns: repeat(
+      8,
+      1fr
+    ); /* Further reduce columns for tiny screens */
+  }
+
+  .word-display-letter {
+    font-size: 2rem;
+  }
+
+  .popup {
+    width: 90vw;
+    padding: 1.5rem;
+  }
+
+  .popup-content {
+    font-size: 1rem;
+    padding: 1.5rem;
+  }
+
+  .popup button {
+    font-size: 1rem;
+  }
+
+  .message {
+    display: none;
+  }
+
+  .lives {
+    display: none;
+  }
+
+  .lives {
+    display: none;
+  }
 }

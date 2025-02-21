@@ -1,13 +1,17 @@
-import { useEffect } from "react";
+import { useState } from "react";
 
 interface AlphabetButtonsProps {
   selectedLetters: string[];
   setSelectedLetters: React.Dispatch<React.SetStateAction<string[]>>;
+  setClickedLetters: React.Dispatch<React.SetStateAction<string[]>>;
+  clickedLetters: string[];
 }
 
 function AlphabetButtons({
   selectedLetters,
   setSelectedLetters,
+  setClickedLetters,
+  clickedLetters,
 }: AlphabetButtonsProps) {
   const letters: string[] = [
     "a",
@@ -39,9 +43,10 @@ function AlphabetButtons({
   ];
 
   function handleLetterClick(letter: string) {
-    setSelectedLetters((currLetters) => {
-      return [...currLetters, letter];
-    });
+    if (!selectedLetters.includes(letter)) {
+      setSelectedLetters((prev) => [...prev, letter]);
+      setClickedLetters((prev) => [...prev, letter]); // Add clicked letter to the list
+    }
   }
 
   //   useEffect(() => {
@@ -49,15 +54,17 @@ function AlphabetButtons({
   //   }, [selectedLetters]);
 
   return (
-    <section>
+    <section className="keyboard">
       <ul className="alphabet-buttons">
         {letters.map((letter, index) => (
           <li key={index}>
             <button
-              className="alphabet-button"
+              className={`alphabet-button ${
+                clickedLetters.includes(letter) ? "clicked" : ""
+              }`}
               type="button"
               onClick={() => handleLetterClick(letter)}
-              disabled={selectedLetters.includes(letter)}
+              disabled={clickedLetters.includes(letter)} // Also disable the button if it's clicked
             >
               {letter.toUpperCase()}
             </button>

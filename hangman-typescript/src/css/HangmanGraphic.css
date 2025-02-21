@@ -1,111 +1,274 @@
+/* Hangman Graphic Container */
 .hangman-graphic {
   display: flex;
   justify-content: center;
-  margin: 20px;
+  align-items: center;
+  flex-direction: column;
+  height: auto; /* Let it adjust naturally */
+  max-height: 400px; /* Prevents overflow on small screens */
+  margin-top: 0;
+  position: relative;
 }
 
-.hangman-graphic div {
-  width: 20px;
-  height: 20px;
-  background-color: #333;
-  margin: 0 5px;
-  border-radius: 50%;
-}
-
+/* Gallows */
 .top-bar {
-  height: 10px;
-  width: 200px;
-  background: black;
-  margin-left: 120px;
+  height: 1.5vh;
+  width: 25vw;
+  max-width: 200px;
+  background: white;
+  margin-left: 7vw; /* Centered based on the viewport */
 }
 
 .vertical-bar {
-  height: 350px;
-  width: 10px;
-  background: black;
-  margin-left: 120px;
+  height: 40vh;
+  max-height: 300px;
+  width: 1vw;
+  max-width: 10px;
+  background: white;
+  margin-left: 7vw;
 }
 
 .bottom-bar {
-  height: 10px;
-  width: 250px;
-  background: black;
+  height: 1.5vh;
+  width: 30vw;
+  max-width: 250px;
+  background: white;
 }
 
+/* Hanging Rope */
 .hanging-rope {
-  height: 50px;
-  width: 10px;
-  background: black;
+  height: 6vh;
+  max-height: 50px;
+  width: 1vw;
+  max-width: 10px;
+  background: white;
   position: absolute;
   top: 0;
   right: 0;
 }
 
+/* Hangman Body Position */
 .body-position {
   position: relative;
-  margin-top: 70px;
+  margin-top: 5vh;
 }
 
-/* Hangman Body Parts*/
+/* Hangman Body Parts */
 .head {
-  width: 50px;
-  height: 50px;
-  border-radius: 100%;
-  border: 10px solid black;
+  width: 7vh;
+  height: 7vh;
+  border-radius: 50%;
+  border: 1vh solid white;
   position: absolute;
-  top: 50px;
-  right: -30px;
+  top: 5vh;
+  right: -3vh;
 }
 
 .body {
-  width: 10px;
-  height: 100px;
-  background: black;
+  width: 1vh;
+  height: 12vh;
+  background: white;
   position: absolute;
-  top: 120px;
+  top: 12vh;
   right: 0;
 }
 
-.right-arm {
-  width: 100px;
-  height: 10px;
-  background: black;
+.right-arm,
+.left-arm {
+  width: 10vh;
+  height: 1vh;
+  background: white;
   position: absolute;
-  top: 150px;
-  right: -100px;
+  top: 16vh;
+}
+
+.right-arm {
+  right: -10vh;
   rotate: -30deg;
   transform-origin: left bottom;
 }
 
 .left-arm {
-  width: 100px;
-  height: 10px;
-  background: black;
-  position: absolute;
-  top: 150px;
-  right: 10px;
+  right: 0;
   rotate: 30deg;
   transform-origin: right bottom;
 }
 
-.right-leg {
-  width: 100px;
-  height: 10px;
-  background: black;
+.right-leg,
+.left-leg {
+  width: 10vh;
+  height: 1vh;
+  background: white;
   position: absolute;
-  top: 210px;
-  right: -90px;
+  top: 23vh;
+}
+
+.right-leg {
+  right: -9vh;
   rotate: 60deg;
   transform-origin: left bottom;
 }
 
 .left-leg {
-  width: 100px;
-  height: 10px;
-  background: black;
-  position: absolute;
-  top: 210px;
   right: 0;
   rotate: -60deg;
   transform-origin: right bottom;
+}
+
+@media (max-width: 768px) {
+  .hangman-graphic {
+    max-width: 150px; /* Reduce overall width */
+    max-height: 220px; /* Reduce height proportionally */
+  }
+
+  .top-bar {
+    width: 15vw;
+    max-width: 120px;
+    height: 1vh;
+  }
+
+  .vertical-bar {
+    height: 25vh;
+    max-height: 160px;
+    width: 0.8vw;
+  }
+
+  .bottom-bar {
+    width: 20vw;
+    max-width: 160px;
+  }
+
+  .hanging-rope {
+    height: 4vh;
+    max-height: 30px;
+    right: 6vw; /* Adjust position to align */
+  }
+
+  .head {
+    width: 5vh;
+    height: 5vh;
+    border: 0.8vh solid white;
+    top: 4vh;
+    right: -3vh;
+  }
+
+  .body {
+    height: 9vh;
+    width: 0.8vh;
+    top: 9vh;
+    right: -1vh;
+  }
+
+  .right-arm,
+  .left-arm {
+    width: 6vh;
+    height: 0.8vh;
+    top: 12vh;
+  }
+
+  .right-arm {
+    right: -7vh;
+    rotate: -30deg;
+  }
+
+  .left-arm {
+    right: -0.2vh;
+    rotate: 30deg;
+  }
+
+  .right-leg,
+  .left-leg {
+    width: 6vh;
+    height: 0.8vh;
+    top: 17vh;
+  }
+
+  .right-leg {
+    right: -6.3vh;
+    rotate: 60deg;
+  }
+
+  .left-leg {
+    right: -0.8vh;
+    rotate: -60deg;
+  }
+}
+
+@media (max-width: 480px) {
+  .hangman-graphic {
+    max-width: 120px;
+    max-height: 180px;
+  }
+
+  .top-bar {
+    width: 12vw;
+    max-width: 100px;
+    height: 0.8vh;
+  }
+
+  .vertical-bar {
+    height: 20vh;
+    max-height: 140px;
+    width: 0.6vw;
+  }
+
+  .bottom-bar {
+    width: 15vw;
+    max-width: 130px;
+  }
+
+  .hanging-rope {
+    height: 3vh;
+    max-height: 20px;
+    right: -0.8vw;
+  }
+
+  .head {
+    width: 4vh;
+    height: 4vh;
+    border: 0.6vh solid white;
+    top: 3vh;
+    right: -2vh;
+  }
+
+  .body {
+    height: 7vh;
+    width: 0.6vh;
+    top: 7vh;
+    right: -0.3vh;
+  }
+
+  .right-arm,
+  .left-arm {
+    width: 5vh;
+    height: 0.6vh;
+    top: 10vh;
+  }
+
+  .right-arm {
+    right: -5vh;
+    rotate: -30deg;
+  }
+
+  .left-arm {
+    right: -0.3vh;
+    rotate: 30deg;
+  }
+
+  .right-leg,
+  .left-leg {
+    width: 5vh;
+    height: 0.6vh;
+    top: 13vh;
+  }
+
+  .right-leg {
+    right: -4.7vh;
+    rotate: 60deg;
+  }
+
+  .left-leg {
+    right: -0.3vh;
+    rotate: -60deg;
+  }
 }

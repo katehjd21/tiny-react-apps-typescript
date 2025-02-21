@@ -5,7 +5,6 @@ import Message from "./components/Message";
 import WordDisplay from "./components/WordDisplay";
 import HangmanGraphic from "./components/HangmanGraphic";
 import { useState } from "react";
-import ResetButton from "./components/ResetButton";
 import words from "./data/wordList.json";
 
 function App() {
@@ -14,6 +13,7 @@ function App() {
   });
   const [selectedLetters, setSelectedLetters] = useState<string[]>([]);
   const [gameReset, setGameReset] = useState<boolean>(false);
+  const [clickedLetters, setClickedLetters] = useState<string[]>([]); // Track clicked letters
 
   const incorrectLetters: string[] = selectedLetters.filter(
     (letter) => !word.includes(letter)
@@ -27,29 +27,38 @@ function App() {
     setSelectedLetters([]);
     setGameReset(false);
     setWord(getWord());
+    setClickedLetters([]);
   }
 
   return (
-    <div className="hangman-container">
-      <Header />
-      <HangmanGraphic
-        incorrectGuesses={incorrectLetters.length}
-        word={word}
-        selectedLetters={selectedLetters}
-        setGameReset={setGameReset}
-      />
-      <WordDisplay
-        setWord={setWord}
-        word={word}
-        selectedLetters={selectedLetters}
-      />
-      <ResetButton resetGame={resetGame} />
-      <Message word={word} selectedLetters={selectedLetters} />
-      <AlphabetButtons
-        selectedLetters={selectedLetters}
-        setSelectedLetters={setSelectedLetters}
-      />
-    </div>
+    <>
+      <div className="hangman-container">
+        <div className="hangman-graphic-container">
+          <HangmanGraphic
+            incorrectGuesses={incorrectLetters.length}
+            word={word}
+            selectedLetters={selectedLetters}
+            setGameReset={setGameReset}
+            resetGame={resetGame}
+          />
+        </div>
+        <div className="word-keyboard-container">
+          <Header />
+          <WordDisplay
+            setWord={setWord}
+            word={word}
+            selectedLetters={selectedLetters}
+          />
+          <Message word={word} selectedLetters={selectedLetters} />
+          <AlphabetButtons
+            selectedLetters={selectedLetters}
+            setSelectedLetters={setSelectedLetters}
+            setClickedLetters={setClickedLetters}
+            clickedLetters={clickedLetters}
+          />
+        </div>
+      </div>
+    </>
   );
 }
 
