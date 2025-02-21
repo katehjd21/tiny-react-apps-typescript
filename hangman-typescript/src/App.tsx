@@ -12,7 +12,7 @@ function App() {
     return words[Math.floor(Math.random() * words.length)];
   });
   const [selectedLetters, setSelectedLetters] = useState<string[]>([]);
-  const [gameReset, setGameReset] = useState<boolean>(false);
+  const [_, setGameReset] = useState<boolean>(false);
   const [clickedLetters, setClickedLetters] = useState<string[]>([]); // Track clicked letters
 
   const incorrectLetters: string[] = selectedLetters.filter(

@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 interface AlphabetButtonsProps {
   selectedLetters: string[];
   setSelectedLetters: React.Dispatch<React.SetStateAction<string[]>>;

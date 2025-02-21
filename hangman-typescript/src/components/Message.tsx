@@ -7,7 +7,7 @@ interface MessageProps {
 
 function Message({ word, selectedLetters }: MessageProps) {
   const [displayMessage, setDisplayMessage] = useState<string>("");
-  const [unluckyCount, setUnluckyCount] = useState<number>(0);
+  const [_, setUnluckyCount] = useState<number>(0);
 
   useEffect(() => {
     if (selectedLetters.length === 0) return;
